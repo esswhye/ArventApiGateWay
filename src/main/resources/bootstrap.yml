@@ -1,0 +1,64 @@
+spring:
+  application:
+    name: apigateway-service
+
+---
+spring:
+  profiles:
+  cloud:
+    consul:
+      host: 172.28.1.253
+      port: 8500
+      discovery:
+        enabled: true
+        instance-id: apigateway-service
+        service-name: apigateway-service
+        register-health-check: true
+        health-check-interval: 15s
+      retry:
+        initial-interval: 1000
+        max-attempts: 10
+        max-interval: 2000
+        multiplier: 1.1
+
+---
+spring:
+  profiles: dt
+  cloud:
+    consul:
+      discovery:
+        enabled: true
+        instance-id: apigateway-service
+        service-name: apigateway-service
+        prefer-ip-address: true
+        register-health-check: true
+      host: consul
+      port: 8500
+
+---
+spring:
+  profiles: dp
+  cloud:
+    consul:
+      discovery:
+        enabled: true
+        instance-id: apigateway-service
+        service-name: apigateway-service
+        prefer-ip-address: true
+        register-health-check: true
+      host: consul
+      port: 8500
+
+---
+spring:
+  profiles: production
+  cloud:
+    consul:
+      discovery:
+        enabled: true
+        instance-id: apigateway-service
+        service-name: apigateway-service
+        prefer-ip-address: true
+        register-health-check: true
+      host: consul
+      port: 8500

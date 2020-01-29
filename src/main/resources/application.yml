@@ -1,0 +1,55 @@
+server:
+  port: 8080
+#endpoints:
+#  cors:
+#    allow-credentials: true
+#    allowed-origins: '*'
+#    allowed-headers: Origin, X-Requested-With, Content-Type, Accept, Connection, User-Agent, Cookie, OCB.SYNCER.JSESSIONID
+#    allowed-methods: POST,GET,DELETE,PUT
+#    max-age: 1800
+zuul:
+  #  prefix: /api/v6/
+  #  stripPrefix: true
+  ignored-patterns: /actuator/**
+  ignoredServices: "*"
+  routes:
+   #
+    #ignored-patterns: /actuator/**
+    order:
+      path: /order/**
+      serviceId: order-service
+    customer:
+      path: /customer/**
+      serviceId: customer-service
+    product:
+      path: /product/**
+      serviceId: product-service
+  ribbon-isolation-strategy: thread
+  #Default -> sensitiveHeaders: Cookie,Set-Cookie,Authorization
+  sensitiveHeaders:
+  host:
+    connect-timeout-millis: 50000
+    socket-timeout-millis:  100000
+
+ribbon:
+  eager-load:
+    enabled: true
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000
+order:
+  ribbon:
+    ReadTimeout: 10000
+
+customer:
+  ribbon:
+    ReadTimeout: 10000
+
+product:
+  ribbon:
+    ReadTimeout: 10000
