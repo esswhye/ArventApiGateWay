@@ -1,17 +1,25 @@
 package com.arvent.zuul.filter;
 
+import com.google.common.io.CharStreams;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
+import com.netflix.zuul.exception.ZuulException;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.CharEncoding;
+import org.springframework.util.ReflectionUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 @Slf4j
-public class LogFilter extends ZuulFilter {
+public class LogErrorFilter extends ZuulFilter {
 
     @Override
     public String filterType() {
-        return "pre";
+        return "error";
     }
 
     @Override
@@ -32,10 +40,11 @@ public class LogFilter extends ZuulFilter {
     }
 
     @Override
-    public Object run() {
+    public Object run() throws ZuulException {
+
         RequestContext ctx = RequestContext.getCurrentContext();
-        HttpServletRequest request = ctx.getRequest();
-        log.info("Requested method = {}, url {}", request.getMethod(), request.getRequestURL().toString(),request.getContentType());
+        String response = ctx.getResponseBody();
+        log.info("Error occurred, Response = {}, ", response);
         return null;
     }
 }

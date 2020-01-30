@@ -8,7 +8,7 @@ server:
 #    allowed-methods: POST,GET,DELETE,PUT
 #    max-age: 1800
 zuul:
-  #  prefix: /api/v6/
+  #prefix: /arvent
   #  stripPrefix: true
   ignored-patterns: /actuator/**
   ignoredServices: "*"
@@ -16,20 +16,20 @@ zuul:
    #
     #ignored-patterns: /actuator/**
     order:
-      path: /order/**
+      path: /order-service/**
       serviceId: order-service
     customer:
-      path: /customer/**
+      path: /customer-service/**
       serviceId: customer-service
     product:
-      path: /product/**
+      path: /product-service/**
       serviceId: product-service
   ribbon-isolation-strategy: thread
   #Default -> sensitiveHeaders: Cookie,Set-Cookie,Authorization
   sensitiveHeaders:
-  host:
-    connect-timeout-millis: 50000
-    socket-timeout-millis:  100000
+ # host:
+  #  connect-timeout-millis: 60000
+  #  socket-timeout-millis:  60000
 
 ribbon:
   eager-load:
@@ -41,15 +41,30 @@ hystrix:
       execution:
         isolation:
           thread:
-            timeoutInMilliseconds: 10000
-order:
-  ribbon:
-    ReadTimeout: 10000
+            timeoutInMilliseconds: 20000
 
-customer:
-  ribbon:
-    ReadTimeout: 10000
 
-product:
+
+order-service:
   ribbon:
-    ReadTimeout: 10000
+    ReadTimeout: 5000
+
+customer-service:
+  ribbon:
+    ReadTimeout: 5000
+
+product-service:
+  ribbon:
+    ReadTimeout: 5000
+
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+  endpoint:
+    health:
+      show-details: always

@@ -20,7 +20,6 @@ spring:
         max-attempts: 10
         max-interval: 2000
         multiplier: 1.1
-
 ---
 spring:
   profiles: dt

@@ -21,8 +21,8 @@ public class ZuulApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(ZuulApplication.class, args);
 	}
-
-	@Bean
+    /*
+	//@Bean
 	public FallbackProvider routeZuulFallbackProvider() {
 		GenericZuulFallbackProvider routeZuulFallback = new GenericZuulFallbackProvider();
 		routeZuulFallback.setRoute("*");
@@ -32,5 +32,6 @@ public class ZuulApplication {
 //		routeZuulFallback.setResponseBody("We are little busy. Comeback After Sometime");
 		return routeZuulFallback;
 	}
+	*/
 }
 
