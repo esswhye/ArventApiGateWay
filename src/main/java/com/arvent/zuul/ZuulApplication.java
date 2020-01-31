@@ -1,9 +1,11 @@
 package com.arvent.zuul;
 
+import com.arvent.zuul.config.RibbonConfig;
 import com.arvent.zuul.provider.GenericZuulFallbackProvider;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.cloud.netflix.zuul.filters.route.FallbackProvider;
 import org.springframework.context.annotation.Bean;
@@ -16,13 +18,14 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableZuulProxy
 @EnableDiscoveryClient
 @EnableSwagger2
+@RibbonClient(name="RandomRule",configuration = RibbonConfig.class)
 public class ZuulApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ZuulApplication.class, args);
 	}
-    /*
-	//@Bean
+	/*
+	@Bean
 	public FallbackProvider routeZuulFallbackProvider() {
 		GenericZuulFallbackProvider routeZuulFallback = new GenericZuulFallbackProvider();
 		routeZuulFallback.setRoute("*");
@@ -32,6 +35,6 @@ public class ZuulApplication {
 //		routeZuulFallback.setResponseBody("We are little busy. Comeback After Sometime");
 		return routeZuulFallback;
 	}
-	*/
+*/
 }
 

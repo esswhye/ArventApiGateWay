@@ -12,8 +12,8 @@ zuul:
   #  stripPrefix: true
   ignored-patterns: /actuator/**
   ignoredServices: "*"
+  retryable: true
   routes:
-   #
     #ignored-patterns: /actuator/**
     order:
       path: /order-service/**
@@ -24,16 +24,29 @@ zuul:
     product:
       path: /product-service/**
       serviceId: product-service
-  ribbon-isolation-strategy: thread
+ # ribbon-isolation-strategy: thread
   #Default -> sensitiveHeaders: Cookie,Set-Cookie,Authorization
-  sensitiveHeaders:
+#sensitiveHeaders:
  # host:
   #  connect-timeout-millis: 60000
   #  socket-timeout-millis:  60000
 
+
+#  NIWSServerListClassName: com.netflix.loadbalancer.ConfigurationBasedServerList
+#  NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+spring:
+  cloud:
+    loadbalancer:
+      retry:
+        enabled: true
 ribbon:
   eager-load:
     enabled: true
+  ReadTimeout: 5000
+  maxAutoRetries: 0
+  MaxAutoRetriesNextServer: 2
+  OkToRetryOnAllOperations: true
+  retryableStatusCodes: 500,404,502
 
 hystrix:
   command:
@@ -42,20 +55,21 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 20000
+      #circuitBreaker:
+       # enabled: false
 
+#order-service:
+#  ribbon:
+#    ReadTimeout: 5000
 
+#customer-service:
+#  ribbon:
+#    ReadTimeout: 5000
 
-order-service:
-  ribbon:
-    ReadTimeout: 5000
+#product-service:
+#  ribbon:
+#    ReadTimeout: 5000
 
-customer-service:
-  ribbon:
-    ReadTimeout: 5000
-
-product-service:
-  ribbon:
-    ReadTimeout: 5000
 
 
 

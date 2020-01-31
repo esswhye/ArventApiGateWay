@@ -11,7 +11,7 @@ spring:
       port: 8500
       discovery:
         enabled: true
-        instance-id: apigateway-service
+        instance-id: ${spring.application.name}:${random.value}
         service-name: apigateway-service
         register-health-check: true
         health-check-interval: 15s
