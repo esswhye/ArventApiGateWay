@@ -8,7 +8,7 @@ server:
 #    allowed-methods: POST,GET,DELETE,PUT
 #    max-age: 1800
 zuul:
-  #prefix: /arvent
+  prefix: /arvent
   #  stripPrefix: true
   ignored-patterns: /actuator/**
   ignoredServices: "*"
