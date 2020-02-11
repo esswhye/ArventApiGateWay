@@ -1,6 +1,6 @@
 
 package com.arvent.zuul.config;
-
+/*
 import com.netflix.loadbalancer.IRule;
 import com.netflix.loadbalancer.RandomRule;
 import com.netflix.loadbalancer.RoundRobinRule;
@@ -17,3 +17,4 @@ public class RibbonConfig {
         return new RoundRobinRule();
     }
 }
+*/

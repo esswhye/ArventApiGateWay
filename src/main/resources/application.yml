@@ -1,5 +1,6 @@
 server:
   port: 8080
+
 #endpoints:
 #  cors:
 #    allow-credentials: true
@@ -8,10 +9,10 @@ server:
 #    allowed-methods: POST,GET,DELETE,PUT
 #    max-age: 1800
 zuul:
-  prefix: /arvent
-  #  stripPrefix: true
-  ignored-patterns: /actuator/**
-  ignoredServices: "*"
+  #prefix: /arvent
+  #stripPrefix: true
+  #ignored-patterns: /actuator/**
+  #ignoredServices: "*"
   retryable: true
   routes:
     #ignored-patterns: /actuator/**
@@ -25,28 +26,26 @@ zuul:
       path: /product-service/**
       serviceId: product-service
  # ribbon-isolation-strategy: thread
-  #Default -> sensitiveHeaders: Cookie,Set-Cookie,Authorization
+   #Default -> sensitiveHeaders: Cookie,Set-Cookie,Authorization
 #sensitiveHeaders:
  # host:
   #  connect-timeout-millis: 60000
   #  socket-timeout-millis:  60000
 
-
-#  NIWSServerListClassName: com.netflix.loadbalancer.ConfigurationBasedServerList
-#  NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
 spring:
   cloud:
     loadbalancer:
       retry:
         enabled: true
 ribbon:
+#  ReadTimeout: 10000
+#  ConnectTimeout: 10000
   eager-load:
     enabled: true
-  ReadTimeout: 5000
   maxAutoRetries: 0
   MaxAutoRetriesNextServer: 2
   OkToRetryOnAllOperations: true
-  retryableStatusCodes: 500,404,502
+  retryableStatusCodes: 500,404,502,-408
 
 hystrix:
   command:
@@ -54,31 +53,31 @@ hystrix:
       execution:
         isolation:
           thread:
-            timeoutInMilliseconds: 20000
+            timeoutInMilliseconds: 60000
       #circuitBreaker:
        # enabled: false
 
-#order-service:
-#  ribbon:
-#    ReadTimeout: 5000
+order-service:
+  ribbon:
+    ReadTimeout: 10000
+    ConnectTimeout: 10000
 
-#customer-service:
-#  ribbon:
-#    ReadTimeout: 5000
+customer-service:
+    ribbon:
+     # NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+      ReadTimeout: 10000
+      ConnectTimeout: 10000
 
-#product-service:
-#  ribbon:
-#    ReadTimeout: 5000
-
-
-
+product-service:
+  ribbon:
+    ReadTimeout: 10000
+    ConnectTimeout: 10000
 
 management:
   endpoints:
     web:
       exposure:
         include: '*'
-
-  endpoint:
-    health:
-      show-details: always
+#  endpoint:
+#    health:
+#      show-details: always
