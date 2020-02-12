@@ -31,7 +31,6 @@ zuul:
  # host:
   #  connect-timeout-millis: 60000
   #  socket-timeout-millis:  60000
-
 spring:
   cloud:
     loadbalancer:
@@ -46,6 +45,15 @@ ribbon:
   MaxAutoRetriesNextServer: 2
   OkToRetryOnAllOperations: true
   retryableStatusCodes: 500,404,502,-408
+
+logging:
+  level:
+    org.springframework: ERROR
+    com.arvent: INFO
+  pattern:
+    console: "%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"
+    file: "%d %p %c{1.} [%t] %m%n"
+  file: app.log
 
 hystrix:
   command:
