@@ -35,7 +35,8 @@ public class LogFilter extends ZuulFilter {
     public Object run() {
         RequestContext ctx = RequestContext.getCurrentContext();
         HttpServletRequest request = ctx.getRequest();
-        log.info("Requested method = {}, url {}", request.getMethod(), request.getRequestURL().toString(),request.getContentType());
+
+        log.info("Requested method = {}, url {}, from {}", request.getMethod(), request.getRequestURL().toString(),request.getHeader("User-Agent"));
         return null;
     }
 }

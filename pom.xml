@@ -69,14 +69,21 @@
 			<artifactId>spring-cloud-starter-netflix-hystrix-dashboard</artifactId>
 			<version>2.2.1.RELEASE</version>
 		</dependency>
-
-
-
 		<!-- https://mvnrepository.com/artifact/org.springframework.retry/spring-retry -->
 		<dependency>
 			<groupId>org.springframework.retry</groupId>
 			<artifactId>spring-retry</artifactId>
 			<version>1.2.5.RELEASE</version>
+		</dependency>
+		<!-- JWT implementation !-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.9.0</version>
 		</dependency>
 
 

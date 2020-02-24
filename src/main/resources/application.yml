@@ -16,6 +16,13 @@ zuul:
   retryable: true
   routes:
     #ignored-patterns: /actuator/**
+
+    # Map path to auth service
+    auth:
+      path: /auth-service/**
+      service-id: auth-service
+      prefix: false
+      sensitive-headers: Cookie,Set-Cookie
     order:
       path: /order-service/**
       serviceId: order-service
@@ -25,8 +32,14 @@ zuul:
     product:
       path: /product-service/**
       serviceId: product-service
+    #TEST JWT
+    test:
+      path: /common-service/**
+      serviceId: common-service
+
  # ribbon-isolation-strategy: thread
-   #Default -> sensitiveHeaders: Cookie,Set-Cookie,Authorization
+   #Default ->
+    #sensitiveHeaders: Cookie,Set-Cookie,Authorization,User-Agent
 #sensitiveHeaders:
  # host:
   #  connect-timeout-millis: 60000
@@ -37,6 +50,7 @@ spring:
     loadbalancer:
       retry:
         enabled: true
+
 ribbon:
 #  ReadTimeout: 10000
 #  ConnectTimeout: 10000
@@ -78,6 +92,13 @@ management:
     web:
       exposure:
         include: '*'
+      cors:
+        allow-credentials: true
+        allowed-origins: '*'
+        allowed-headers: Origin, X-Requested-With, Content-Type, Accept, Connection, User-Agent, Cookie, Authorization
+        allowed-methods: POST,GET,DELETE,PUT
+        max-age: 1800
+
 #  endpoint:
 #    health:
 #      show-details: always

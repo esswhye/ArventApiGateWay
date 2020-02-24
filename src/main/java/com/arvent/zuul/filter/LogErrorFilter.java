@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-
+/*
 @Slf4j
 public class LogErrorFilter extends ZuulFilter {
 
@@ -48,3 +48,4 @@ public class LogErrorFilter extends ZuulFilter {
         return null;
     }
 }
+*/

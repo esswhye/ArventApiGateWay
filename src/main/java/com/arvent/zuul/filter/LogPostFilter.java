@@ -46,15 +46,25 @@ public class LogPostFilter extends ZuulFilter {
         RequestContext ctx = RequestContext.getCurrentContext();
         List<Pair<String, String>> headers = ctx.getZuulResponseHeaders();
         HttpServletRequest request = ctx.getRequest();
-        String headerString = headers.stream().map(e -> e.second()).reduce(" ", String::concat);
-        log.info("input url {} ,content-type " +"{"+"{}"+"}",request.getRequestURI(), headerString);
+        //String headerString = headers.stream().map(e -> e.second()).reduce(" ", String::concat);
+        log.info("input url {}", request.getRequestURI());
+        headers.forEach(e -> log.info(e.first() + " " + e.second()));
+        /*
+        log.info("input url {} \n " +
+                ",content-type " +"{"+"{}"+"}",request.getRequestURI(), headerString);
+        */
         HttpServletResponse response = ctx.getResponse();
+        /*
+        if (response.getHeader("Authorization") != null) {
+            log.info(response.getHeader("Authorization"));
+        }*/
+
         log.info("Response status {}", response.getStatus());
 
         try(InputStream is = ctx.getResponseDataStream())
         {
             String respData = CharStreams.toString(new InputStreamReader(is, CharEncoding.UTF_8));
-            if(respData.contains("<html>"))
+            if(respData.isEmpty()||respData.contains("<html>"))
             {
                 ctx.setResponseBody(respData);
                 return null;
