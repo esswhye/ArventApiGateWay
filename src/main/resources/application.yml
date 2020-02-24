@@ -23,6 +23,7 @@ zuul:
       service-id: auth-service
       prefix: false
       sensitive-headers: Cookie,Set-Cookie
+      #sensitive-headers: Cookie,Set-Cookie,Authorization
     order:
       path: /order-service/**
       serviceId: order-service
@@ -44,7 +45,6 @@ zuul:
  # host:
   #  connect-timeout-millis: 60000
   #  socket-timeout-millis:  60000
-
 spring:
   cloud:
     loadbalancer:
@@ -60,6 +60,15 @@ ribbon:
   MaxAutoRetriesNextServer: 2
   OkToRetryOnAllOperations: true
   retryableStatusCodes: 500,404,502,-408
+
+#logging:
+#  level:
+#    org.springframework: ERROR
+#    com.arvent: INFO
+#  pattern:
+#    console: "%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"
+#    file: "%d %p %c{1.} [%t] %m%n"
+#  file: app.log
 
 hystrix:
   command:
@@ -92,12 +101,15 @@ management:
     web:
       exposure:
         include: '*'
-      cors:
-        allow-credentials: true
-        allowed-origins: '*'
-        allowed-headers: Origin, X-Requested-With, Content-Type, Accept, Connection, User-Agent, Cookie, Authorization
-        allowed-methods: POST,GET,DELETE,PUT
-        max-age: 1800
+#      cors:
+#        allow-credentials: true
+#        allowed-origins: '*'
+#        allowed-headers: Origin, X-Requested-With, Content-Type, Accept, Connection, User-Agent, Cookie
+#        allowed-methods: POST,GET,DELETE,PUT
+#        max-age: 1800
+  endpoint:
+    shutdown:
+      enabled: true
 
 #  endpoint:
 #    health:

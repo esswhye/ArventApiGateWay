@@ -45,10 +45,15 @@ public class LogPostFilter extends ZuulFilter {
     public Object run() {
         RequestContext ctx = RequestContext.getCurrentContext();
         List<Pair<String, String>> headers = ctx.getZuulResponseHeaders();
-        HttpServletRequest request = ctx.getRequest();
+        //HttpServletRequest request = ctx.getRequest();
         //String headerString = headers.stream().map(e -> e.second()).reduce(" ", String::concat);
-        log.info("input url {}", request.getRequestURI());
-        headers.forEach(e -> log.info(e.first() + " " + e.second()));
+        //log.info("input url {}", request.getRequestURI());
+        String headerString="";
+        for (Pair header:headers
+             ) {
+            headerString = headerString.concat(header.first() + ": "+ header.second()+" ");
+        }
+        log.info("Exposed Headers " +"{"+"{}"+"}", headerString);
         /*
         log.info("input url {} \n " +
                 ",content-type " +"{"+"{}"+"}",request.getRequestURI(), headerString);
@@ -69,7 +74,7 @@ public class LogPostFilter extends ZuulFilter {
                 ctx.setResponseBody(respData);
                 return null;
             }
-            log.info("Response Data={}",respData);
+            log.info("Response Data = {}",respData);
             ctx.setResponseBody(respData);
         }catch(IOException ex)
         {
