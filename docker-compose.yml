@@ -11,3 +11,7 @@ services:
       - arvent_backend
     deploy:
       replicas: 1
+      
+networks:
+  arvent_backend:
+    external: true
