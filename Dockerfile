@@ -6,5 +6,7 @@ COPY ${JAR_FILE} app.jar
 ENV TIME_ZONE              Asia/Singapore
 ENV SPRING_PROFILES_ACTIVE dt
 
+EXPOSE 8080
+
 ENTRYPOINT ["java","-jar","/app.jar"]
 
