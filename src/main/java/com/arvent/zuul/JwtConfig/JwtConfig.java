@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
 public class JwtConfig {
-
+    //Hardcoded values
     @Value("${security.jwt.uri:/auth-service/**}")
     private String uri;
 

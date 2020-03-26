@@ -1,0 +1,13 @@
+version: "3.7"
+
+services:
+
+  gateway:
+    build: .
+    image: esswhye/arvent-gateway
+    environment:
+      SPRING_PROFILES_ACTICE: dt
+    networks:
+      - arvent_backend
+    deploy:
+      replicas: 1
