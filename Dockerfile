@@ -4,8 +4,8 @@
 FROM maven:3.6.0-jdk-8-slim AS build
 COPY src /src
 COPY pom.xml .
-RUN mvn -f pom.xml clean package
-
+#RUN mvn -f pom.xml clean package
+RUN  mvn -f pom.xml package -Dmaven.test.skip=true
 #
 # Package Stage
 #
@@ -29,5 +29,7 @@ WORKDIR /app
 #TESTING
 EXPOSE 8080
 
-ENTRYPOINT ["java","-jar","/app.jar","-Djava.security.egd=file:/dev/./urandom","-Dspring.profiles.active=dt"]
+ENTRYPOINT ["java","-jar","/app.jar","-Djava.security.egd=file:/dev/./urandom"]
+
+#"-Dspring.profiles.active=dt"
 

@@ -15,11 +15,11 @@ spring:
         service-name: apigateway-service
         register-health-check: true
         health-check-interval: 15s
-      retry:
-        initial-interval: 1000
-        max-attempts: 10
-        max-interval: 2000
-        multiplier: 1.1
+#      retry:
+#        initial-interval: 1000
+#        max-attempts: 10
+#        max-interval: 2000
+#        multiplier: 1.1
 ---
 spring:
   profiles: dt
