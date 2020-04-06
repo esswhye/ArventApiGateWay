@@ -29,5 +29,5 @@ WORKDIR /app
 #TESTING
 EXPOSE 8080
 
-ENTRYPOINT ["java","-jar","/app.jar","-Djava.security.egd=file:/dev/./urandom"]
+ENTRYPOINT ["java","-jar","/app.jar","-Djava.security.egd=file:/dev/./urandom","-Dspring.profiles.active=dt"]
 
