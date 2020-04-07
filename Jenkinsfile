@@ -6,7 +6,6 @@ node{
     }
 
     stage('Maven build') {
-            sh 'cd ArventApiGateWay'
             sh 'mvn clean install'
         }
   }
