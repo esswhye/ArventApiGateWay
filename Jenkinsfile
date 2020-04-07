@@ -18,7 +18,7 @@ node{
           try {
 
             sh "docker rm -f arvent-gateway || true"
-            sh "docker run -d -p 80:8080 --name=arvent-gateway --network arvent_backend arvent-gateway:B${BUILD_NUMBER}"
+            sh "docker run -d -p 8010:8080 --name=arvent-gateway --network arvent_backend arvent-gateway:B${BUILD_NUMBER}"
           }
           catch(e) {
             error "Integration Test failed"
