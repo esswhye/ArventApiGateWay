@@ -3,10 +3,10 @@ version: "3.3"
 services:
 
   gateway:
-    build: .
+    build: DockerfileTest
     image: esswhye/arvent-gateway
     ports:
-      - "8080:8080"
+      - "80:8080"
     environment:
       SPRING_PROFILES_ACTICE: dt
     networks:
