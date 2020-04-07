@@ -1,3 +1,5 @@
+env.DOCKERHUB_USERNAME = 'esswhye'
+
 node{
 
     stage('Clone Sources')
@@ -9,7 +11,7 @@ node{
               //An Example
               //sh 'mvn test'
               sh 'mvn clean install'
-              sh 'docker login'
+              //sh 'docker login'
               sh 'docker build -t arvent-gateway:B${BUILD_NUMBER} -f DockerfileTest .'
             }
     stage("Integration Test") {
@@ -26,5 +28,14 @@ node{
             sh "docker images -aq -f dangling=true | xargs docker rmi || true "
           }
         }
+
+        stage("Build") {
+              sh "docker build -t ${DOCKERHUB_USERNAME}/arvent-gateway:${BUILD_NUMBER} ."
+            }
+            stage("Publish") {
+              withDockerRegistry([credentialsId: 'DockerHub']) {
+                sh "docker push ${DOCKERHUB_USERNAME}/arvent-gateway:${BUILD_NUMBER}"
+              }
+            }
 
   }
