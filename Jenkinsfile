@@ -30,7 +30,7 @@ node{
         }
 
         stage("Build") {
-              sh "docker build -t ${DOCKERHUB_USERNAME}/arvent-gateway:${BUILD_NUMBER} ."
+              sh "docker build -t ${DOCKERHUB_USERNAME}/arvent-gateway:${BUILD_NUMBER} -f DockerfileTest  ."
             }
             stage("Publish") {
               withDockerRegistry([credentialsId: 'DockerHub']) {
