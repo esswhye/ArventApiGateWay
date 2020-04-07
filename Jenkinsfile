@@ -1,4 +1,9 @@
 node{
+    tools {
+                maven 'Maven 3.6.3'
+                jdk 'jdk8'
+            }
+
     stage('Clone Sources')
     {
 
@@ -9,13 +14,6 @@ node{
                          echo "M2_HOME = ${M2_HOME}"
                      '''
     }
-
-    tools {
-            maven 'Maven 3.6'
-            jdk 'jdk8'
-        }
-
-
 
     stage('Maven build') {
             buildInfo = rtMaven.run pom: 'ArventGateWayApi/pom.xml', goals: 'clean install'
