@@ -10,15 +10,17 @@ node{
     stage("Unit Test & Build") {
               //An Example
               //sh 'mvn test'
-              sh 'mvn clean install'
+             try{ sh 'mvn clean install'
               //sh 'docker login'
-              sh 'docker build -t arvent-gateway:B${BUILD_NUMBER} -f DockerfileTest .'
+              sh 'docker build -t ${DOCKERHUB_USERNAME}/arvent-gateway:${BUILD_NUMBER} -f DockerfileTest .'
+              }
+              finally{}
             }
     stage("Integration Test") {
           try {
 
             sh "docker rm -f arvent-gateway || true"
-            sh "docker run -d -p 8010:8080 --name=arvent-gateway --network arvent_backend arvent-gateway:B${BUILD_NUMBER}"
+            sh "docker run -d -p 8010:8080 --name=arvent-gateway --network arvent_backend arvent-gateway:${BUILD_NUMBER}"
           }
           catch(e) {
             error "Integration Test failed"
@@ -29,9 +31,9 @@ node{
           }
         }
 
-        stage("Build") {
-              sh "docker build -t ${DOCKERHUB_USERNAME}/arvent-gateway:${BUILD_NUMBER} -f DockerfileTest  ."
-            }
+       // stage("Build") {
+       //       sh "docker build -t ${DOCKERHUB_USERNAME}/arvent-gateway:${BUILD_NUMBER} -f DockerfileTest  ."
+       //     }
             stage("Publish") {
               withDockerRegistry([credentialsId: 'DockerHub']) {
                 sh "docker push ${DOCKERHUB_USERNAME}/arvent-gateway:${BUILD_NUMBER}"
