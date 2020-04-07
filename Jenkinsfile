@@ -20,7 +20,7 @@ node{
           try {
 
             sh "docker rm -f arvent-gateway || true"
-            sh "docker run -d -p 8010:8080 --name=arvent-gateway --network arvent_backend arvent-gateway:${BUILD_NUMBER}"
+            sh "docker run -d -p 8010:8080 --name=arvent-gateway --network arvent_backend ${DOCKERHUB_USERNAME}/arvent-gateway:${BUILD_NUMBER}"
           }
           catch(e) {
             error "Integration Test failed"
@@ -38,6 +38,7 @@ node{
               withDockerRegistry([credentialsId: 'DockerHub']) {
                 sh "docker push ${DOCKERHUB_USERNAME}/arvent-gateway:${BUILD_NUMBER}"
               }
+              sh "docker image rm ${DOCKERHUB_USERNAME}/arvent-gateway:${BUILD_NUMBER}"
             }
 
   }
