@@ -11,7 +11,7 @@ node{
               //An Example
               //sh 'mvn test'
               sh 'mvn clean install'
-              //sh 'docker login'
+              sh 'docker login'
               sh 'docker build -t arvent-gateway:B${BUILD_NUMBER} -f DockerfileTest .'
             }
     stage("Integration Test") {
