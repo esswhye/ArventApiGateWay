@@ -24,7 +24,7 @@ node{
           }finally {
             sh "docker rm -f arvent-gateway || true"
             sh "docker ps -aq | xargs docker rm || true"
-            sh "docker images -aq -f dangling=true | xargs docker rmi || true "
+            sh "docker images -aq -f dangling=true | xargs docker rmi || true"
           }
         }
 
