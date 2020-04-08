@@ -1,6 +1,8 @@
 env.DOCKERHUB_USERNAME = 'esswhye'
 
-
+/*
+    Not a very CI/CD Way due to limitation of server  i have (Only using 2 server in 1 environment)
+*/
 node{
     /*stage('Git') {
                 steps {
@@ -25,6 +27,9 @@ node{
             }
     stage("Integration Test") {
           try {
+            //Removing the server in order to test (CPU limitation and ports)
+            sh "docker service rm arvent_gateway || true"
+
 
             sh "docker rm -f arvent-gateway || true"
             sh "docker run -d -p 8010:8080 --name=arvent-gateway --network arvent_backend ${DOCKERHUB_USERNAME}/arvent-gateway:${BUILD_NUMBER}"
