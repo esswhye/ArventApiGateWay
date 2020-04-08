@@ -52,7 +52,7 @@ node{
               sh "docker image rm ${DOCKERHUB_USERNAME}/arvent-gateway:latest"
 
             }
-       stage{"Deploy"}{
+       stage("Deploy"){
             sh "docker stack deploy arvent --compose-file=./docker-compose.yml --with-registry-auth "
        }
   }
