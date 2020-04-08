@@ -1,7 +1,14 @@
 env.DOCKERHUB_USERNAME = 'esswhye'
 
-node{
 
+node{
+    /*stage('Git') {
+                steps {
+                    step([$class: 'WsCleanup'])
+                    checkout scm
+                }
+            }
+    */
     stage('Clone Sources')
     {
      checkout scm
@@ -34,11 +41,21 @@ node{
        // stage("Build") {
        //       sh "docker build -t ${DOCKERHUB_USERNAME}/arvent-gateway:${BUILD_NUMBER} -f DockerfileTest  ."
        //     }
-            stage("Publish") {
-              withDockerRegistry([credentialsId: 'DockerHub']) {
-                sh "docker push ${DOCKERHUB_USERNAME}/arvent-gateway:${BUILD_NUMBER}"
+      stage("Publish") {
+            withDockerRegistry([credentialsId: 'DockerHub']) {
+                //sh "docker push ${DOCKERHUB_USERNAME}/arvent-gateway:${BUILD_NUMBER}"
+
+                sh "docker push ${DOCKERHUB_USERNAME}/arvent-gateway:latest"
+                sh "docker image tag "
               }
               sh "docker image rm ${DOCKERHUB_USERNAME}/arvent-gateway:${BUILD_NUMBER}"
+              sh "docker image rm ${DOCKERHUB_USERNAME}/arvent-gateway:latest"
+
             }
+       stage{"Deploy"}{
+            sh "docker stack deploy arvent --compose-file=./docker-compose.yml --with-registry-auth "
+       }
+
+
 
   }
