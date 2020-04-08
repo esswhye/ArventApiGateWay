@@ -44,9 +44,9 @@ node{
       stage("Publish") {
             withDockerRegistry([credentialsId: 'DockerHub']) {
                 //sh "docker push ${DOCKERHUB_USERNAME}/arvent-gateway:${BUILD_NUMBER}"
-
+                sh "docker image tag ${DOCKERHUB_USERNAME}/arvent-gateway:${BUILD_NUMBER} ${DOCKERHUB_USERNAME}/arvent-gateway:${BUILD_NUMBER}:latest"
                 sh "docker push ${DOCKERHUB_USERNAME}/arvent-gateway:latest"
-                sh "docker image tag "
+
               }
               sh "docker image rm ${DOCKERHUB_USERNAME}/arvent-gateway:${BUILD_NUMBER}"
               sh "docker image rm ${DOCKERHUB_USERNAME}/arvent-gateway:latest"
@@ -55,7 +55,4 @@ node{
        stage{"Deploy"}{
             sh "docker stack deploy arvent --compose-file=./docker-compose.yml --with-registry-auth "
        }
-
-
-
   }
