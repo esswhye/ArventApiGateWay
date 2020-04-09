@@ -34,7 +34,7 @@ node{
 
 
             sh "docker rm -f arvent-gateway || true"
-            sh "docker run -d -p ${dockerportest} --name=arvent-gateway --network arvent_backend ${DOCKERHUB_USERNAME}/arvent-gateway:${BUILD_NUMBER}"
+            sh "docker run -d --name=arvent-gateway --network arvent_backend ${DOCKERHUB_USERNAME}/arvent-gateway:${BUILD_NUMBER}"
           }
           catch(e) {
             error "Integration Test failed"
