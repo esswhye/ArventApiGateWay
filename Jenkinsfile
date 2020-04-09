@@ -1,5 +1,5 @@
 env.DOCKERHUB_USERNAME = 'esswhye'
-
+env.dockerportest = '1111:8080'
 /*
     Not a very CI/CD Way due to limitation of server  i have (Only using 2 server in 1 environment)
 */
@@ -23,7 +23,9 @@ node{
               //sh 'docker login'
               sh 'docker build -t ${DOCKERHUB_USERNAME}/arvent-gateway:${BUILD_NUMBER} -f DockerfileTest .'
               }
-              finally{}
+              catch(e){
+                sh 'docker image rm -f ${DOCKERHUB_USERNAME}/${project}:${BUILD_NUMBER}'
+               }
             }
     stage("Integration Test") {
           try {
@@ -32,7 +34,7 @@ node{
 
 
             sh "docker rm -f arvent-gateway || true"
-            sh "docker run -d -p 8010:8080 --name=arvent-gateway --network arvent_backend ${DOCKERHUB_USERNAME}/arvent-gateway:${BUILD_NUMBER}"
+            sh "docker run -d -p ${dockerportest} --name=arvent-gateway --network arvent_backend ${DOCKERHUB_USERNAME}/arvent-gateway:${BUILD_NUMBER}"
           }
           catch(e) {
             error "Integration Test failed"
