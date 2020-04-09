@@ -36,6 +36,7 @@ spring:
         service-name: apigateway-service
         prefer-ip-address: true
         register-health-check: true
+        health-check-interval: 15s
       config:
           enabled: true
           watch:
