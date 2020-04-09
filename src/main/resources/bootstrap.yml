@@ -36,8 +36,9 @@ spring:
         service-name: apigateway-service
         prefer-ip-address: true
         register-health-check: true
-        health-check-interval: 30s
-        health-check-timeout: 30s
+        health-check-interval: 15s
+        health-check-timeout: 120s
+        healthCheckCriticalTimeout: 5m
       config:
           enabled: true
           watch:
@@ -72,3 +73,18 @@ spring:
         register-health-check: true
       host: consul
       port: 8500
+
+#spring:
+
+#  cloud:
+#    consul:
+#      host: localhost #  consul的地址
+#      port: 8500 # consul 的端口
+#      discovery:
+#        prefer-ip-address: true  # // This must be matched
+#        tags: version=1.0
+#        instance-id: ${spring.application.name}:${spring.cloud.client.ip-address}
+#        healthCheckPath: /actuator/health # 服务做健康检查的端口
+#        healthCheckInterval: 15s  # 服务健康检查的周期
+#        healthCheckTimeout: 60s # 服务检查是的timeout时长
+#        healthCheckCriticalTimeout: 5m # 服务健康检查失败5分钟后，删除服务
