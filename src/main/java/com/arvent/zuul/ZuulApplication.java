@@ -18,7 +18,7 @@ import org.springframework.http.HttpStatus;
 @EnableZuulProxy
 @EnableDiscoveryClient
 @EnableCircuitBreaker
-@EnableHystrixDashboard //If all your hystrix commands are from zuul, there are no thread pools as it uses semaphore isolation.
+//@EnableHystrixDashboard //If all your hystrix commands are from zuul, there are no thread pools as it uses semaphore isolation.
 //@RibbonClient(name="RandomRule",configuration = RibbonConfig.class)
 public class ZuulApplication {
 

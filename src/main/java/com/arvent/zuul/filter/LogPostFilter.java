@@ -53,7 +53,7 @@ public class LogPostFilter extends ZuulFilter {
              ) {
             headerString = headerString.concat(header.first() + ": "+ header.second()+" ");
         }
-        log.info("Exposed Headers " +"{"+"{}"+"}", headerString);
+        //log.info("Exposed Headers " +"{"+"{}"+"}", headerString);
         /*
         log.info("input url {} \n " +
                 ",content-type " +"{"+"{}"+"}",request.getRequestURI(), headerString);

@@ -102,7 +102,7 @@ management:
       exposure:
         include: '*'
       #base-path: /
-  #      cors:
+#      cors:
 #        allow-credentials: true
 #        allowed-origins: '*'
 #        allowed-headers: Origin, X-Requested-With, Content-Type, Accept, Connection, User-Agent, Cookie

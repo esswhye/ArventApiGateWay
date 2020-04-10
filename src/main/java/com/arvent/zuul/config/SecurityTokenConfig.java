@@ -64,9 +64,9 @@ public class SecurityTokenConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/order-service/**").permitAll()
                 .antMatchers(HttpMethod.PUT, "/order-service/**").permitAll()
                 .antMatchers(HttpMethod.DELETE, "/order-service/**").hasAnyRole("ADMIN","VENDOR")
-                .antMatchers("/actuator/health").permitAll()
+                .antMatchers("/actuator/health/**").permitAll()
                 //Shutdown using CURL (must change)
-                .antMatchers(HttpMethod.POST,"/actuator/shutdown").hasRole("ADMIN")
+                .antMatchers(HttpMethod.POST,"/actuator/shutdown/**").hasRole("ADMIN")
                 // Any other must be authenticated
                 .anyRequest().authenticated();
 
