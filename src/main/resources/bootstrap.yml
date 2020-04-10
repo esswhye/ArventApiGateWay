@@ -1,3 +1,6 @@
+server:
+  port: 8080
+
 spring:
   application:
     name: apigateway-service
@@ -38,11 +41,8 @@ spring:
         register-health-check: true
         health-check-interval: 15s
         health-check-timeout: 120s
-        healthCheckCriticalTimeout: 5m
-      config:
-          enabled: true
-          watch:
-            enabled: true
+        health-check-url: localhost:${server.port}/actuator/health
+      #healthCheckCriticalTimeout: 5m
       host: consul
       port: 8500
 
