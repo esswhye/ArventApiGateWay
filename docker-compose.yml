@@ -13,7 +13,8 @@ services:
       - arvent_backend
     deploy:
       replicas: 1
-      replicas-max-per-node: 1
+      placement:
+        max_replicas_per_node: 1
     volumes:
       - my-arvent:/app
 
