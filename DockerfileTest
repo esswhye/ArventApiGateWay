@@ -20,7 +20,7 @@ EXPOSE 8081
 
 #ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom", "-Dspring.profiles.active=dt", "-XX:+UseG1GC", "-Xmx128m", "-Xms32m" "-jar" ,"/app.jar"]
 
-ENTRYPOINT ["java","-Dspring.profiles.active=dt", "-XX:+UseG1GC", "-Xmx128m", "-Xms32m" "-jar" ,"/app.jar"]
+ENTRYPOINT ["java","-Dspring.profiles.active=dt", "-XX:+UseG1GC", "-Xmx128m", "-Xms32m", "-jar" ,"/app.jar"]
 
 #"-Dspring.profiles.active=dt"
 

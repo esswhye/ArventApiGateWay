@@ -5,8 +5,7 @@ services:
   gateway:
     build:
       context: .
-      dockerfile:
-        DockerfileTest
+      dockerfile: DockerfileTest
     image: esswhye/arvent-gateway:latest
     ports:
       - "8010:8081"
