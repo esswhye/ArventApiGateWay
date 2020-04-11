@@ -11,16 +11,17 @@ services:
       SPRING_PROFILES_ACTICE: dt
     networks:
       - arvent_backend
-    deploy:
-      replicas: 1
-      placement:
-        max_replicas_per_node: 1
+        deploy:
+          replicas: 1
+          placement:
+            max_replicas_per_node: 1
     volumes:
       - my-arvent:/app
 
 networks:
   arvent_backend:
-    external: true
+    external:
+      name: arvent_backend
 
 volumes:
   my-arvent:

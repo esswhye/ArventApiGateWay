@@ -8,7 +8,7 @@ COPY ${JAR_FILE} app.jar
 #ENV JAVA_OPTIONS    -Xmx256m
 ENV TIME_ZONE Asia/Singapore
 
-ENV SPRING_PROFILES_ACTIVE dt
+#ENV SPRING_PROFILES_ACTIVE dt
 
 RUN echo "$TIME_ZONE" > /etc/timezone
 #RUN dpkg-reconfigure -f noninteractive tzdata
