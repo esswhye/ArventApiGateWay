@@ -13,7 +13,12 @@ services:
       - arvent_backend
     deploy:
       replicas: 1
-      
+    volumes:
+      - my-arvent:/app
+
 networks:
   arvent_backend:
     external: true
+
+volumes:
+  my-arvent:

@@ -24,7 +24,7 @@ ENV SPRING_PROFILES_ACTIVE dt
 RUN echo "$TIME_ZONE" > /etc/timezone
 RUN dpkg-reconfigure -f noninteractive tzdata
 
-WORKDIR /app
+WORKDIR /app/gateway
 
 #TESTING
 EXPOSE 8080

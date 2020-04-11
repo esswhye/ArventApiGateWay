@@ -1,5 +1,3 @@
-
-
 #endpoints:
 #  cors:
 #    allow-credentials: true
@@ -37,11 +35,11 @@ zuul:
       path: /common-service/**
       serviceId: common-service
 
- # ribbon-isolation-strategy: thread
-   #Default ->
+    # ribbon-isolation-strategy: thread
+    #Default ->
     #sensitiveHeaders: Cookie,Set-Cookie,Authorization,User-Agent
-#sensitiveHeaders:
- # host:
+  #sensitiveHeaders:
+  # host:
   #  connect-timeout-millis: 60000
   #  socket-timeout-millis:  60000
 spring:
@@ -51,8 +49,8 @@ spring:
         enabled: true
 
 ribbon:
-#  ReadTimeout: 10000
-#  ConnectTimeout: 10000
+  #  ReadTimeout: 10000
+  #  ConnectTimeout: 10000
   eager-load:
     enabled: true
   maxAutoRetries: 0
@@ -60,14 +58,14 @@ ribbon:
   OkToRetryOnAllOperations: true
   retryableStatusCodes: 500,404,502,-408
 
-#logging:
-#  level:
-#    org.springframework: ERROR
-#    com.arvent: INFO
-#  pattern:
-#    console: "%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"
-#    file: "%d %p %c{1.} [%t] %m%n"
-#  file: app.log
+logging:
+  level:
+    org.springframework: ERROR
+    com.arvent: INFO
+  pattern:
+    console: "%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"
+    file: "%d %p %c{1.} [%t] %m%n"
+  file: app.log
 
 hystrix:
   command:
@@ -76,8 +74,8 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 60000
-      #circuitBreaker:
-       # enabled: false
+        #circuitBreaker:
+        # enabled: false
 
 order-service:
   ribbon:
@@ -85,10 +83,10 @@ order-service:
     ConnectTimeout: 10000
 
 customer-service:
-    ribbon:
-     # NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
-      ReadTimeout: 10000
-      ConnectTimeout: 10000
+  ribbon:
+    # NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+    ReadTimeout: 10000
+    ConnectTimeout: 10000
 
 product-service:
   ribbon:
@@ -101,12 +99,12 @@ management:
       exposure:
         include: '*'
       #base-path: /
-#      cors:
-#        allow-credentials: true
-#        allowed-origins: '*'
-#        allowed-headers: Origin, X-Requested-With, Content-Type, Accept, Connection, User-Agent, Cookie
-#        allowed-methods: POST,GET,DELETE,PUT
-#        max-age: 1800
+  #      cors:
+  #        allow-credentials: true
+  #        allowed-origins: '*'
+  #        allowed-headers: Origin, X-Requested-With, Content-Type, Accept, Connection, User-Agent, Cookie
+  #        allowed-methods: POST,GET,DELETE,PUT
+  #        max-age: 1800
   endpoint:
     shutdown:
       enabled: true
