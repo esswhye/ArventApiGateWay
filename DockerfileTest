@@ -10,7 +10,7 @@ ENV TIME_ZONE Asia/Singapore
 
 ENV SPRING_PROFILES_ACTIVE dt
 
-RUN echo "$TIME_ZONE" > /etc/timezone
+#RUN echo "$TIME_ZONE" > /etc/timezone
 #RUN dpkg-reconfigure -f noninteractive tzdata
 
 WORKDIR /app/gateway
