@@ -20,8 +20,8 @@ services:
 
 networks:
   arvent_backend:
-    external:
-      name: arvent_backend
+    external: true
+
 
 volumes:
   my-arvent:
