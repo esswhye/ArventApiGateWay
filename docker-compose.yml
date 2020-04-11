@@ -6,7 +6,7 @@ services:
     build: DockerfileTest
     image: esswhye/arvent-gateway:latest
     ports:
-      - "8010:8080"
+      - "8010:8081"
     environment:
       SPRING_PROFILES_ACTICE: dt
     networks:
