@@ -1,4 +1,4 @@
-FROM openjdk:11-jre-slim
+FROM openjdk:11-jdk-slim
 ARG JAR_FILE=target/*.jar
 COPY ${JAR_FILE} app.jar
 #COPY --from=build target/*-SNAPSHOT.jar app.jar
@@ -8,7 +8,7 @@ COPY ${JAR_FILE} app.jar
 #ENV JAVA_OPTIONS    -Xmx256m
 ENV TIME_ZONE Asia/Singapore
 
-#ENV SPRING_PROFILES_ACTIVE dt
+ENV SPRING_PROFILES_ACTIVE dt
 
 RUN echo "$TIME_ZONE" > /etc/timezone
 #RUN dpkg-reconfigure -f noninteractive tzdata
@@ -18,7 +18,9 @@ WORKDIR /app/gateway
 #TESTING
 EXPOSE 8081
 
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom", "-Dspring.profiles.active=dt", "-XX:+UseG1GC", "-Xmx128m", "-Xms32m" "-jar" ,"/app.jar"]
+#ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom", "-Dspring.profiles.active=dt", "-XX:+UseG1GC", "-Xmx128m", "-Xms32m" "-jar" ,"/app.jar"]
+
+ENTRYPOINT ["java","-Dspring.profiles.active=dt", "-XX:+UseG1GC", "-Xmx128m", "-Xms32m" "-jar" ,"/app.jar"]
 
 #"-Dspring.profiles.active=dt"
 
