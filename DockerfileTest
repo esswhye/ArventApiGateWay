@@ -29,7 +29,7 @@ WORKDIR /app/gateway
 #TESTING
 EXPOSE 8081
 
-ENTRYPOINT ["java","-jar","/app.jar","-Djava.security.egd=file:/dev/./urandom", "-Dspring.profiles.active=dt"]
+ENTRYPOINT ["java","-jar","/app.jar","-Djava.security.egd=file:/dev/./urandom", "-Dspring.profiles.active=dt", "-XX:+UseG1GC", "-Xmx128m", "-Xms32m"]
 
 #"-Dspring.profiles.active=dt"
 
