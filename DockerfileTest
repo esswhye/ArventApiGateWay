@@ -4,7 +4,7 @@ ARG JAR_FILE=target/*.jar
 #COPY --from=build target/*-SNAPSHOT.jar app.jar
 RUN mkdir /opt/app
 RUN mkdir /opt/shareclasses
-COPY ${JAR_FILE} japp.jar /opt/app
+COPY ${JAR_FILE} /opt/app
 
 
 #ENV JAVA_HOME              /usr/lib/jvm/java-8-openjdk-amd64
