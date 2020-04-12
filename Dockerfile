@@ -27,7 +27,7 @@ RUN dpkg-reconfigure -f noninteractive tzdata
 WORKDIR /app/gateway
 
 #TESTING
-EXPOSE 8081
+EXPOSE 8010
 
 ENTRYPOINT ["java","-jar","/app.jar","-Djava.security.egd=file:/dev/./urandom"]
 
