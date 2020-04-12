@@ -1,4 +1,4 @@
-version: "3.8"
+version: "3.3"
 
 services:
 
@@ -6,7 +6,7 @@ services:
     build:
       context: .
       dockerfile: DockerfileTest
-    image: esswhye/arvent-gateway:latest
+    image: esswhye/arvent-gateway:1
     ports:
       - "8010:8081"
     environment:
@@ -15,9 +15,6 @@ services:
       - arvent_backend
     deploy:
       replicas: 1
-      resources:
-        limits:
-          memory: 888M
     #      placement:
     #        max_replicas_per_node: 1
     volumes:
