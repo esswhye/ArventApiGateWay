@@ -1,7 +1,10 @@
-FROM openjdk:11-jre-slim
-ARG JAR_FILE=target/*.jar
-COPY ${JAR_FILE} app.jar
+FROM adoptopenjdk:11-jre-openj9
+#ARG JAR_FILE=target/*.jar
+#COPY ${JAR_FILE} app.jar
 #COPY --from=build target/*-SNAPSHOT.jar app.jar
+RUN mkdir /opt/app
+COPY japp.jar /opt/app
+
 
 #ENV JAVA_HOME              /usr/lib/jvm/java-8-openjdk-amd64
 #ENV PATH                   $PATH:$JAVA_HOME/bin
@@ -18,8 +21,8 @@ WORKDIR /app/gateway
 EXPOSE 8081
 
 #ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom", "-Dspring.profiles.active=dt", "-XX:+UseG1GC", "-Xmx128m", "-Xms32m" "-jar" ,"/app.jar"]
-
-ENTRYPOINT ["java","-Dspring.profiles.active=dt", "-XX:+UseG1GC", "-Xmx128m", "-Xms32m", "-jar" ,"/app.jar"]
+CMD ["java", "-jar","-Xmx128m", "-XX:+IdleTuningGcOnIdle", "-Xtune:virtualized", "-Xscmx128m", "-Xscmaxaot100m", "-Dspring.profiles.active=dt","/opt/app/japp.jar"]
+#ENTRYPOINT ["java","-Dspring.profiles.active=dt", "-XX:+UseG1GC", "-Xmx128m", "-Xms32m", "-jar" ,"/app.jar"]
 
 #"-Dspring.profiles.active=dt"
 
