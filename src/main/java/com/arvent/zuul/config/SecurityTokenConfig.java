@@ -25,8 +25,7 @@ public class SecurityTokenConfig extends WebSecurityConfigurerAdapter {
     private JwtConfig jwtConfig;
 
     @Bean
-    public JwtConfig jwtConfig()
-    {
+    public JwtConfig jwtConfig() {
         return new JwtConfig();
     }
 
@@ -38,10 +37,10 @@ public class SecurityTokenConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 // handle an authorized attempts
-                .exceptionHandling().authenticationEntryPoint((req,rsp,e)-> {
-                    log.info("Error 404 Unauthorized User trying to access " + req.getRequestURL().toString());
-                    rsp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
-                })
+                .exceptionHandling().authenticationEntryPoint((req, rsp, e) -> {
+            log.info("Error 404 Unauthorized User trying to access " + req.getRequestURL().toString());
+            rsp.sendError(HttpServletResponse.SC_UNAUTHORIZED);
+        })
                 .and()
                 // Add a filter to validate the tokens with every request
                 .addFilterAfter(new JwtTokenAuthenticationFilter(jwtConfig), UsernamePasswordAuthenticationFilter.class)
@@ -57,20 +56,19 @@ public class SecurityTokenConfig extends WebSecurityConfigurerAdapter {
                 //Allow Only Access to VENDORS or ADMIN for POST PUT DELETE (Product)
                 .antMatchers(HttpMethod.GET, "/product-service/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/product-service/**").permitAll()
-                .antMatchers(HttpMethod.PUT, "/product-service/**").hasAnyRole("ADMIN","VENDOR")
-                .antMatchers(HttpMethod.DELETE, "/product-service/**").hasAnyRole("ADMIN","VENDOR")
+                .antMatchers(HttpMethod.PUT, "/product-service/**").hasAnyRole("ADMIN", "VENDOR")
+                .antMatchers(HttpMethod.DELETE, "/product-service/**").hasAnyRole("ADMIN", "VENDOR")
                 //Allow only access to ADMIN and USERS
                 .antMatchers(HttpMethod.GET, "/order-service/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/order-service/**").permitAll()
                 .antMatchers(HttpMethod.PUT, "/order-service/**").permitAll()
-                .antMatchers(HttpMethod.DELETE, "/order-service/**").hasAnyRole("ADMIN","VENDOR")
+                .antMatchers(HttpMethod.DELETE, "/order-service/**").hasAnyRole("ADMIN", "VENDOR")
                 .antMatchers("/actuator/health/**").permitAll()
                 //Shutdown using CURL (must change)
-                .antMatchers(HttpMethod.POST,"/actuator/shutdown/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.POST, "/actuator/shutdown/**").hasRole("ADMIN")
+                .antMatchers(HttpMethod.GET, "/actuator/prometheus").permitAll()
                 // Any other must be authenticated
                 .anyRequest().authenticated();
-
-
 
 
     }

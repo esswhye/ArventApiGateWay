@@ -94,6 +94,12 @@ product-service:
     ConnectTimeout: 10000
 
 management:
+  metris:
+    export:
+      prometheus:
+        enabled:
+          true
+
   endpoints:
     web:
       exposure:
