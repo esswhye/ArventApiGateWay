@@ -7,21 +7,17 @@ services:
       context: .
       dockerfile: DockerfileTest
     image: esswhye/arvent-gateway:latest
-    ports:
-      - "8010:8010"
+    #    ports:
+    #      - "8010:8010"
     environment:
       SPRING_PROFILES_ACTICE: dt
     networks:
       - arvent_backend
-    #    depends_on:
-    #      - consul
     deploy:
       replicas: 1
       resources:
         limits:
           memory: 888M
-    #      placement:
-    #        max_replicas_per_node: 1
     volumes:
       - my-arvent:/app
       - shareclasses:/opt/shareclasses
@@ -34,3 +30,5 @@ networks:
 volumes:
   my-arvent:
   shareclasses:
+  #    depends_on:
+  #      - consul
