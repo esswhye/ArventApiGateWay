@@ -9,6 +9,8 @@ services:
     image: esswhye/arvent-gateway:latest
     ports:
       - "8010:8010"
+    depends_on:
+      - consul
     environment:
       SPRING_PROFILES_ACTICE: dt
     networks:
