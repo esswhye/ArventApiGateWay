@@ -27,7 +27,7 @@ services:
 networks:
   arvent_backend:
     external: true
-      name: arvent_backend
+#    name: arvent_backend
 
 
 
