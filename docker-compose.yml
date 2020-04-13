@@ -26,8 +26,8 @@ services:
 
 networks:
   arvent_backend:
-    external:
-      name: "host"
+    external: true
+    name: arvent_backend
 
 
 volumes:
