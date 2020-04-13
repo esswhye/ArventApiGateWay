@@ -19,7 +19,8 @@ spring:
         prefer-ip-address: true
         register-health-check: true
         health-check-interval: 15s
-        health-check-url: http://localhost:${server.port}/actuator/health
+        #        health-check-url: http://localhost:${server.port}/actuator/health
+
       config:
         enabled: true
         watch:
@@ -42,7 +43,7 @@ spring:
         register-health-check: true
         health-check-interval: 15s
         health-check-timeout: 120s
-        health-check-url: http://128.199.165.251:8010/actuator/health
+          health-check-url: gateway:${server.port}/actuator/health
       #healthCheckCriticalTimeout: 5m
       host: consul
       port: 8500
