@@ -17,20 +17,17 @@ spring:
         instance-id: ${spring.application.name}:${random.value}
         service-name: apigateway-service
         prefer-ip-address: true
-        register-health-check: false
+        register-health-check: true
         health-check-interval: 15s
         #        health-check-url: http://localhost:${server.port}/actuator/health
-        register: false
-
-      config:
-        enabled: true
-        watch:
-          enabled: true
-#      retry:
-#        initial-interval: 1000
-#        max-attempts: 10
-#        max-interval: 2000
-#        multiplier: 1.1
+        register: true
+      #      retry:
+      #        initial-interval: 1000
+      #        max-attempts: 10
+      #        max-interval: 2000
+      #        multiplier: 1.1
+      #    health-check-url: gateway:${server.port}/actuator/health
+      #healthCheckCriticalTimeout: 5m
 ---
 spring:
   profiles: dt
@@ -40,12 +37,11 @@ spring:
         enabled: true
         instance-id: ${spring.application.name}:${random.value}
         service-name: apigateway-service
-        #        prefer-ip-address: true
+        prefer-ip-address: true
         register-health-check: true
         health-check-interval: 15s
         health-check-timeout: 120s
-      #    health-check-url: gateway:${server.port}/actuator/health
-      #healthCheckCriticalTimeout: 5m
+        register: true
       host: consul
       port: 8500
 
