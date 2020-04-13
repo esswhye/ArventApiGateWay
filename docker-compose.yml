@@ -14,7 +14,7 @@ services:
     environment:
       SPRING_PROFILES_ACTICE: dt
     networks:
-      - arvent_backend
+      - backend
     deploy:
       replicas: 1
       resources:
@@ -25,7 +25,7 @@ services:
       - shareclasses:/opt/shareclasses
 
 networks:
-  arvent_backend:
+  backend:
     external: true
 #    name: arvent_backend
 
