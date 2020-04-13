@@ -15,7 +15,6 @@ services:
       SPRING_PROFILES_ACTICE: dt
     networks:
       - arvent_backend
-    network: host
     deploy:
       replicas: 1
       resources:
@@ -27,7 +26,8 @@ services:
 
 networks:
   arvent_backend:
-    external: true
+    external:
+      name: "host"
 
 
 volumes:
