@@ -7,8 +7,8 @@ services:
       context: .
       dockerfile: DockerfileTest
     image: esswhye/arvent-gateway:latest
-    #    ports:
-    #      - "8010:8010"
+    ports:
+      - "8010:8010"
     environment:
       SPRING_PROFILES_ACTICE: dt
     networks:

@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+
+  consul:
+    image: consul:1.7.2
+    ports:
+      - 8500:8500
+    command: agent -dev -ui -server -bootstrap -client 0.0.0.0
+    networks:
+      - arvent_backend
+    deploy:
+      constraints:
+        - "node.role==manager"
+
+networks:
+  arvent_backend:
+    external: true
