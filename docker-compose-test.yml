@@ -2,30 +2,27 @@ version: "3.3"
 
 services:
 
+
+  consul:
+    image: consul:latest
+    ports:
+      - 8500:8500
+
   gateway:
     build:
       context: .
       dockerfile: DockerfileTest
-    image: esswhye/arvent-gateway:1
+    image: esswhye/arvent-gateway:latest
     ports:
       - "8010:8010"
     environment:
       SPRING_PROFILES_ACTICE: dt
-    networks:
-      - arvent_backend
     deploy:
       replicas: 1
     #      placement:
     #        max_replicas_per_node: 1
-    volumes:
-      - my-arvent:/app
-      - shareclasses:/opt/shareclasses
+    depends_on:
+      - consul
 
 networks:
   arvent_backend:
-    external: true
-
-
-volumes:
-  my-arvent:
-  shareclasses:

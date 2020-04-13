@@ -15,6 +15,7 @@ services:
       SPRING_PROFILES_ACTICE: dt
     networks:
       - arvent_backend
+    network_mode: host
     deploy:
       replicas: 1
       resources:
