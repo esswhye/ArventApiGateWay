@@ -26,7 +26,7 @@ spring:
       #        max-attempts: 10
       #        max-interval: 2000
       #        multiplier: 1.1
-      #    health-check-url: gateway:${server.port}/actuator/health
+
       #healthCheckCriticalTimeout: 5m
 ---
 spring:
@@ -41,6 +41,7 @@ spring:
         register-health-check: true
         health-check-interval: 15s
         health-check-timeout: 120s
+        health-check-url: localhost:${server.port}/actuator/health
         register: true
       host: consul
       port: 8500
