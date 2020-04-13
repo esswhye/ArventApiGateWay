@@ -13,6 +13,8 @@ services:
       SPRING_PROFILES_ACTICE: dt
     networks:
       - arvent_backend
+    depends_on:
+      - consul
     deploy:
       replicas: 1
       resources:

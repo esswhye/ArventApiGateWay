@@ -17,9 +17,10 @@ spring:
         instance-id: ${spring.application.name}:${random.value}
         service-name: apigateway-service
         prefer-ip-address: true
-        register-health-check: true
+        register-health-check: false
         health-check-interval: 15s
         #        health-check-url: http://localhost:${server.port}/actuator/health
+        register: false
 
       config:
         enabled: true
