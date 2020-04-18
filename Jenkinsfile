@@ -1,5 +1,5 @@
 env.DOCKERHUB_USERNAME = 'esswhye'
-env.dockerportest = '1111:8010'
+env.dockerportest = '1111:80'
 /*
     Not a very CI/CD Way due to limitation of server  i have (Only using 2 server in 1 environment)
 */
