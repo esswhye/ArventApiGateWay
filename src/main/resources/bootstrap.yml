@@ -39,7 +39,7 @@ spring:
         register-health-check: true
         health-check-interval: 15s
         health-check-timeout: 60s
-        health-check-url: http://128.199.228.72/:${server.port}/actuator/health
+        health-check-url: http://128.199.228.72:${server.port}/actuator/health
         register: true
       host: consul
       port: 8500
