@@ -1,10 +1,8 @@
 server:
-  port: 80
-
+  port: 8010
 spring:
   application:
     name: apigateway-service
-
 ---
 spring:
   profiles:
@@ -26,7 +24,7 @@ spring:
       #        max-attempts: 10
       #        max-interval: 2000
       #        multiplier: 1.1
-      #    health-check-url: gateway:${server.port}/actuator/health
+
       #healthCheckCriticalTimeout: 5m
 ---
 spring:
@@ -40,7 +38,8 @@ spring:
         prefer-ip-address: true
         register-health-check: true
         health-check-interval: 15s
-        health-check-timeout: 120s
+        health-check-timeout: 60s
+        #       health-check-url:  ${server.address}:${server.port}/actuator/health
         register: true
       host: consul
       port: 8500
