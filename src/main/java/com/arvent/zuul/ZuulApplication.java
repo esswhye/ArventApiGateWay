@@ -13,7 +13,7 @@ import org.springframework.cloud.netflix.zuul.filters.route.FallbackProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 
-
+//https://stackoverflow.com/questions/33703965/how-can-i-run-a-spring-boot-application-on-port-80
 @SpringBootApplication
 @EnableZuulProxy
 @EnableDiscoveryClient
@@ -22,19 +22,19 @@ import org.springframework.http.HttpStatus;
 //@RibbonClient(name="RandomRule",configuration = RibbonConfig.class)
 public class ZuulApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ZuulApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(ZuulApplication.class, args);
+    }
 
-	//@Bean
-	public FallbackProvider routeZuulFallbackProvider() {
-		GenericZuulFallbackProvider routeZuulFallback = new GenericZuulFallbackProvider();
-		routeZuulFallback.setRoute("*");
+    //@Bean
+    public FallbackProvider routeZuulFallbackProvider() {
+        GenericZuulFallbackProvider routeZuulFallback = new GenericZuulFallbackProvider();
+        routeZuulFallback.setRoute("*");
 //		routeZuulFallback.setRoute("route2");
-		routeZuulFallback.setRawStatusCode(200);
-		routeZuulFallback.setStatusCode(HttpStatus.OK);
+        routeZuulFallback.setRawStatusCode(200);
+        routeZuulFallback.setStatusCode(HttpStatus.OK);
 //		routeZuulFallback.setResponseBody("We are little busy. Comeback After Sometime");
-		return routeZuulFallback;
-	}
+        return routeZuulFallback;
+    }
 }
 
