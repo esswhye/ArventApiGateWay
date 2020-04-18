@@ -19,7 +19,7 @@ ENV SPRING_PROFILES_ACTIVE dt
 WORKDIR /app/gateway
 
 #TESTING
-EXPOSE 8010
+EXPOSE 8080
 
 #ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom", "-Dspring.profiles.active=dt", "-XX:+UseG1GC", "-Xmx128m", "-Xms32m" "-jar" ,"/app.jar"]
 #CMD ["java", "-jar","-Xmx128m", "-XX:+IdleTuningGcOnIdle", "-Xtune:virtualized", "-Xscmx128m", "-Xscmaxaot100m", "-Dspring.profiles.active=dt","-Xshareclasses:cacheDir=/opt/shareclasses","/app.jar"]
