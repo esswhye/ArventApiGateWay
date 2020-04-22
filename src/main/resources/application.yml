@@ -10,6 +10,10 @@ zuul:
   #stripPrefix: true
   #ignored-patterns: /actuator/**
   #ignoredServices: "*"
+  ribbon-isolation-strategy: thread
+  thread-pool:
+    use-separate-thread-pools: true
+
   retryable: true
   routes:
     #ignored-patterns: /actuator/**
@@ -42,6 +46,7 @@ zuul:
   # host:
   #  connect-timeout-millis: 60000
   #  socket-timeout-millis:  60000
+
 spring:
   cloud:
     loadbalancer:
@@ -67,6 +72,7 @@ logging:
     file: "%d %p %c{1.} [%t] %m%n"
   file: app.log
 
+#https://stackoverflow.com/questions/48399400/backend-services-isolation-in-zuul
 hystrix:
   command:
     default:
