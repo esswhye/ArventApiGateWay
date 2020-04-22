@@ -63,14 +63,14 @@ ribbon:
   OkToRetryOnAllOperations: true
   retryableStatusCodes: 500,404,502,-408
 
-logging:
-  level:
-    org.springframework: ERROR
-    com.arvent: INFO
-  pattern:
-    console: "%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"
-    file: "%d %p %c{1.} [%t] %m%n"
-  file: app.log
+#logging:
+#  level:
+#    org.springframework: ERROR
+#    com.arvent: INFO
+#  pattern:
+#    console: "%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"
+#    file: "%d %p %c{1.} [%t] %m%n"
+#  file: app.log
 
 #https://stackoverflow.com/questions/48399400/backend-services-isolation-in-zuul
 hystrix:
@@ -113,7 +113,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: '*'
+        include: health
       #base-path: /
   #      cors:
   #        allow-credentials: true
@@ -121,9 +121,9 @@ management:
   #        allowed-headers: Origin, X-Requested-With, Content-Type, Accept, Connection, User-Agent, Cookie
   #        allowed-methods: POST,GET,DELETE,PUT
   #        max-age: 1800
-  endpoint:
-    shutdown:
-      enabled: true
+  # endpoint:
+  #   shutdown:
+  #     enabled: true
 
 #  endpoint:
 #    health:
