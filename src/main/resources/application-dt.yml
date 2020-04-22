@@ -10,7 +10,7 @@ spring:
     loadbalancer:
       retry:
         enabled: true
-  profiles: dt
+#  profiles: dt
 
 zuul:
   #prefix: /arvent
