@@ -114,8 +114,16 @@ management:
   endpoints:
     web:
       exposure:
-        include: health
-      #base-path: /
+        include: health, prometheus
+
+security:
+  jwt:
+    uri: "/auth-service/**"
+    header: "Authorization"
+    prefix: "Bearer "
+    expiration: "#{900}"
+    secret: "C4C1171E3C5DBE450823FF84BA516B95547412CC465A2198152000D97E59FF64"
+    #base-path: /
   #      cors:
   #        allow-credentials: true
   #        allowed-origins: '*'

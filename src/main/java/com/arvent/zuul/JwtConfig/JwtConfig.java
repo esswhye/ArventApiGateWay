@@ -5,19 +5,19 @@ import org.springframework.context.annotation.Configuration;
 
 public class JwtConfig {
     //Hardcoded values
-    @Value("${security.jwt.uri:/auth-service/**}")
+    @Value("${security.jwt.uri}")
     private String uri;
 
-    @Value("${security.jwt.header:Authorization}")
+    @Value("${security.jwt.header}")
     private String header;
 
     @Value("${security.jwt.prefix:Bearer }")
     private String prefix;
 
-    @Value("${security.jwt.expiration:#{24*60*60}}")
+    @Value("${security.jwt.expiration}")
     private int expiration;
 
-    @Value("${security.jwt.secret:JwtSecretKey}")
+    @Value("${security.jwt.secret}")
     private String secret;
 
     public String getUri() {

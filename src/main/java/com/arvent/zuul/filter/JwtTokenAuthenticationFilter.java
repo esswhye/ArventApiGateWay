@@ -3,6 +3,8 @@ package com.arvent.zuul.filter;
 import com.arvent.zuul.JwtConfig.JwtConfig;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
@@ -17,6 +19,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 public class JwtTokenAuthenticationFilter extends OncePerRequestFilter {
 
     private JwtConfig config;
@@ -32,10 +35,9 @@ public class JwtTokenAuthenticationFilter extends OncePerRequestFilter {
         String header = httpServletRequest.getHeader(config.getHeader());
 
         // 2. validate the header and check the prefix
-        if(header == null|| !header.startsWith(config.getPrefix()))
-        {
+        if (header == null || !header.startsWith(config.getPrefix())) {
             // If not valid, go to the next filter.
-            filterChain.doFilter(httpServletRequest,httpServletResponse);
+            filterChain.doFilter(httpServletRequest, httpServletResponse);
 
             return;
         }
@@ -47,7 +49,7 @@ public class JwtTokenAuthenticationFilter extends OncePerRequestFilter {
         // If user tried to access without access token, then he won't be authenticated and an exception will be thrown.
 
         // 3. Get the token
-        String token =  header.replace(config.getPrefix(), "");
+        String token = header.replace(config.getPrefix(), "");
 
         // exceptions might be thrown in creating the claims if for example the token is expired
         try {
@@ -58,7 +60,7 @@ public class JwtTokenAuthenticationFilter extends OncePerRequestFilter {
                     .getBody();
 
             String username = claims.getSubject();
-            if(username != null){
+            if (username != null) {
 
                 @SuppressWarnings("unchecked")
                 List<String> authorities = (List<String>) claims.get("authorities");
@@ -67,20 +69,21 @@ public class JwtTokenAuthenticationFilter extends OncePerRequestFilter {
                 // UsernamePasswordAuthenticationToken: A built-in object, used by spring to represent the current authenticated/being authenticated user
                 // It needs a list of authorities, which has type of GrantedAuthorities interface, where SimpleGrantedAuthority is an implementation of that interface
                 UsernamePasswordAuthenticationToken authenticationToken =
-                        new UsernamePasswordAuthenticationToken(username,null,authorities.stream().map(SimpleGrantedAuthority::new)
+                        new UsernamePasswordAuthenticationToken(username, null, authorities.stream().map(SimpleGrantedAuthority::new)
                                 .collect(Collectors.toList()));
 
                 // 6. Authenticate the user
                 // Now, user is authenticated
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-
+                filterChain.doFilter(httpServletRequest, httpServletResponse);
             }
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
+            log.info("EXPIRED");
+            httpServletResponse.setStatus(HttpStatus.SC_EXPECTATION_FAILED);
             SecurityContextHolder.clearContext();
         }
         //go to the next filter in the filter chain
-        filterChain.doFilter(httpServletRequest,httpServletResponse);
+//        filterChain.doFilter(httpServletRequest,httpServletResponse);
 
     }
 }
