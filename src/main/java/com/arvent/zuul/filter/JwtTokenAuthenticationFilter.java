@@ -2,6 +2,7 @@ package com.arvent.zuul.filter;
 
 import com.arvent.zuul.JwtConfig.JwtConfig;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpStatus;
@@ -77,9 +78,11 @@ public class JwtTokenAuthenticationFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
                 filterChain.doFilter(httpServletRequest, httpServletResponse);
             }
-        } catch (Exception e) {
+        } catch (ExpiredJwtException e) {
             log.info("EXPIRED");
             httpServletResponse.setStatus(HttpStatus.SC_EXPECTATION_FAILED);
+            SecurityContextHolder.clearContext();
+        } catch (Exception e) {
             SecurityContextHolder.clearContext();
         }
         //go to the next filter in the filter chain
