@@ -1,5 +1,5 @@
 package com.arvent.zuul.config;
-/*
+
 import com.arvent.zuul.JwtConfig.JwtConfig;
 import com.arvent.zuul.filter.JwtTokenAuthenticationFilter;
 import lombok.extern.slf4j.Slf4j;
@@ -13,11 +13,11 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.servlet.http.HttpServletResponse;
-*/
+
 /**
  * It is recommended to add an AdminController that is not visible for the user
  */
-/*
+
 @EnableWebSecurity
 @Slf4j
 public class SecurityTokenConfig extends WebSecurityConfigurerAdapter {
@@ -33,7 +33,7 @@ public class SecurityTokenConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.
-                cors().and().csrf().disable()
+                csrf().disable()
                 // make sure we use stateless session; session won't be used to store user's state.
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
@@ -49,6 +49,7 @@ public class SecurityTokenConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 //Allow all who are accessing to this services
                 .antMatchers(HttpMethod.POST, jwtConfig.getUri()).permitAll()
+                /*
                 //Allow all to access Customer (POST,GET,UPDATE)
                 .antMatchers(HttpMethod.GET, "/customer-service/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/customer-service/**").permitAll()
@@ -64,14 +65,16 @@ public class SecurityTokenConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/order-service/**").permitAll()
                 .antMatchers(HttpMethod.PUT, "/order-service/**").permitAll()
                 .antMatchers(HttpMethod.DELETE, "/order-service/**").hasAnyRole("ADMIN", "VENDOR")
+
+                 */
                 .antMatchers("/actuator/health/**").permitAll()
                 //Shutdown using CURL (must change)
                 .antMatchers(HttpMethod.POST, "/actuator/shutdown/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.GET, "/actuator/prometheus").permitAll()
                 // Any other must be authenticated
+
                 .anyRequest().authenticated();
 
 
     }
 }
-*/
