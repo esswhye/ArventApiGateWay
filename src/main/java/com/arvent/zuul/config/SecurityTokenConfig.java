@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * It is recommended to add an AdminController that is not visible for the user
  */
+//https://medium.com/omarelgabrys-blog/microservices-with-spring-boot-authentication-with-jwt-part-3-fafc9d7187e8
 
 @EnableWebSecurity
 @Slf4j
@@ -49,30 +50,26 @@ public class SecurityTokenConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 //Allow all who are accessing to this services
                 .antMatchers(HttpMethod.POST, jwtConfig.getUri()).permitAll()
-                /*
                 //Allow all to access Customer (POST,GET,UPDATE)
-                .antMatchers(HttpMethod.GET, "/customer-service/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/customer-service/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/customer-service/**", "/product-service/**", "/order-service/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/customer-service/**", "/product-service/**", "/order-service/**").permitAll()
                 .antMatchers(HttpMethod.PUT, "/customer-service/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/customer-service/**").hasRole("ADMIN")
                 //Allow Only Access to VENDORS or ADMIN for POST PUT DELETE (Product)
-                .antMatchers(HttpMethod.GET, "/product-service/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/product-service/**").permitAll()
+                //.antMatchers(HttpMethod.GET, "/product-service/**").permitAll()
+                //.antMatchers(HttpMethod.POST, "/product-service/**").permitAll()
                 .antMatchers(HttpMethod.PUT, "/product-service/**").hasAnyRole("ADMIN", "VENDOR")
                 .antMatchers(HttpMethod.DELETE, "/product-service/**").hasAnyRole("ADMIN", "VENDOR")
                 //Allow only access to ADMIN and USERS
-                .antMatchers(HttpMethod.GET, "/order-service/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/order-service/**").permitAll()
+                //.antMatchers(HttpMethod.GET, "/order-service/**").permitAll()
+                //.antMatchers(HttpMethod.POST, "/order-service/**").permitAll()
                 .antMatchers(HttpMethod.PUT, "/order-service/**").permitAll()
                 .antMatchers(HttpMethod.DELETE, "/order-service/**").hasAnyRole("ADMIN", "VENDOR")
-
-                 */
                 .antMatchers("/actuator/health/**").permitAll()
                 //Shutdown using CURL (must change)
                 .antMatchers(HttpMethod.POST, "/actuator/shutdown/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.GET, "/actuator/prometheus").permitAll()
                 // Any other must be authenticated
-
                 .anyRequest().authenticated();
 
 

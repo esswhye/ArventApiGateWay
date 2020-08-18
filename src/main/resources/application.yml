@@ -110,7 +110,7 @@ management:
       cors:
         allow-credentials: true
         allowed-origins: '*'
-        allowed-headers: Origin, X-Requested-With, Content-Type, Accept, Connection, User-Agent, Cookie, OCB.SYNCER.JSESSIONID
+        #        allowed-headers: Origin, X-Requested-With, Content-Type, Accept, Connection, User-Agent, Cookie, OCB.SYNCER.JSESSIONID
         allowed-methods: POST,GET,DELETE,PUT
         max-age: 1800
 
