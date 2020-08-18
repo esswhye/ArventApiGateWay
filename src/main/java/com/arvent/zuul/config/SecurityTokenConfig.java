@@ -1,5 +1,5 @@
 package com.arvent.zuul.config;
-
+/*
 import com.arvent.zuul.JwtConfig.JwtConfig;
 import com.arvent.zuul.filter.JwtTokenAuthenticationFilter;
 import lombok.extern.slf4j.Slf4j;
@@ -13,10 +13,11 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.servlet.http.HttpServletResponse;
-
+*/
 /**
  * It is recommended to add an AdminController that is not visible for the user
  */
+/*
 @EnableWebSecurity
 @Slf4j
 public class SecurityTokenConfig extends WebSecurityConfigurerAdapter {
@@ -31,8 +32,8 @@ public class SecurityTokenConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
+        http.
+                cors().and().csrf().disable()
                 // make sure we use stateless session; session won't be used to store user's state.
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
@@ -73,3 +74,4 @@ public class SecurityTokenConfig extends WebSecurityConfigurerAdapter {
 
     }
 }
+*/
