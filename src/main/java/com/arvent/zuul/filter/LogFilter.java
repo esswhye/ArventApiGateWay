@@ -24,8 +24,7 @@ public class LogFilter extends ZuulFilter {
 
         RequestContext ctx = RequestContext.getCurrentContext();
         HttpServletRequest request = ctx.getRequest();
-        if(request.getRequestURI().contains("swagger") || request.getRequestURI().contains("api-docs"))
-        {
+        if (request.getRequestURI().contains("swagger") || request.getRequestURI().contains("api-docs")) {
             return false;
         }
         return true;
@@ -36,7 +35,8 @@ public class LogFilter extends ZuulFilter {
         RequestContext ctx = RequestContext.getCurrentContext();
         HttpServletRequest request = ctx.getRequest();
 
-        log.info("Requested method = {}, url {}, from {}", request.getMethod(), request.getRequestURL().toString(),request.getHeader("User-Agent"));
+        log.info("Requested method = {}, url {}, from {}", request.getMethod(), request.getRequestURL().toString(), request.getHeader("host"));
+        //request.getHeader("User-Agent"));
         return null;
     }
 }

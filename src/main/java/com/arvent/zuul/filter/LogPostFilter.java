@@ -33,8 +33,8 @@ public class LogPostFilter extends ZuulFilter {
 
         RequestContext ctx = RequestContext.getCurrentContext();
         HttpServletRequest request = ctx.getRequest();
-        if(request.getRequestURI().contains("swagger") || request.getRequestURI().contains("api-docs"))
-        {
+        //Filtering away
+        if (request.getRequestURI().contains("swagger") || request.getRequestURI().contains("api-docs") || request.getRequestURI().contains("/customer/image/download/")) {
             return false;
         }
 
@@ -48,10 +48,10 @@ public class LogPostFilter extends ZuulFilter {
         //HttpServletRequest request = ctx.getRequest();
         //String headerString = headers.stream().map(e -> e.second()).reduce(" ", String::concat);
         //log.info("input url {}", request.getRequestURI());
-        String headerString="";
-        for (Pair header:headers
-             ) {
-            headerString = headerString.concat(header.first() + ": "+ header.second()+" ");
+        String headerString = "";
+        for (Pair header : headers
+        ) {
+            headerString = headerString.concat(header.first() + ": " + header.second() + " ");
         }
         //log.info("Exposed Headers " +"{"+"{}"+"}", headerString);
         /*
@@ -66,18 +66,15 @@ public class LogPostFilter extends ZuulFilter {
 
         log.info("Response status {}", response.getStatus());
 
-        try(InputStream is = ctx.getResponseDataStream())
-        {
+        try (InputStream is = ctx.getResponseDataStream()) {
             String respData = CharStreams.toString(new InputStreamReader(is, CharEncoding.UTF_8));
-            if(respData.isEmpty()||respData.contains("<html>"))
-            {
+            if (respData.isEmpty() || respData.contains("<html>")) {
                 ctx.setResponseBody(respData);
                 return null;
             }
-            log.info("Response Data = {}",respData);
+            log.info("Response Data = {}", respData);
             ctx.setResponseBody(respData);
-        }catch(IOException ex)
-        {
+        } catch (IOException ex) {
             log.info(ex.getMessage());
             ex.printStackTrace();
         }
