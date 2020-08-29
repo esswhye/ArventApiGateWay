@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsUtils;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -48,6 +49,8 @@ public class SecurityTokenConfig extends WebSecurityConfigurerAdapter {
                 .addFilterAfter(new JwtTokenAuthenticationFilter(jwtConfig), UsernamePasswordAuthenticationFilter.class)
                 // Authorization requests config
                 .authorizeRequests()
+                //Cors
+                .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
                 //Allow all who are accessing to this services
                 .antMatchers(HttpMethod.POST, jwtConfig.getUri()).permitAll()
                 //Allow all to access Customer (POST,GET,UPDATE)
@@ -65,7 +68,7 @@ public class SecurityTokenConfig extends WebSecurityConfigurerAdapter {
                 //.antMatchers(HttpMethod.POST, "/order-service/**").permitAll()
                 .antMatchers(HttpMethod.PUT, "/order-service/**").permitAll()
                 .antMatchers(HttpMethod.DELETE, "/order-service/**").hasAnyRole("ADMIN", "VENDOR")
-                .antMatchers(HttpMethod.GET,"/actuator/health/**","/actuator/prometheus","/favicon.ico").permitAll()
+                .antMatchers(HttpMethod.GET, "/actuator/health/**", "/actuator/prometheus", "/favicon.ico").permitAll()
                 //Shutdown using CURL (must change)
                 .antMatchers(HttpMethod.POST, "/actuator/shutdown/**").hasRole("ADMIN")
                 //.antMatchers(HttpMethod.GET, "/actuator/prometheus").permitAll()
