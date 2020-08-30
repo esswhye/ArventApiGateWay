@@ -49,7 +49,7 @@ public class SecurityTokenConfig extends WebSecurityConfigurerAdapter {
                 .addFilterAfter(new JwtTokenAuthenticationFilter(jwtConfig), UsernamePasswordAuthenticationFilter.class)
                 // Authorization requests config
                 .authorizeRequests()
-                //Cors
+                //Cors https://stackoverflow.com/questions/54255950/configure-spring-for-cors
                 .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
                 //Allow all who are accessing to this services
                 .antMatchers(HttpMethod.POST, jwtConfig.getUri()).permitAll()
