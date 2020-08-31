@@ -112,7 +112,7 @@ management:
         allowed-origins: '*'
         #allowed-headers: Origin, X-Requested-With, Content-Type, Accept, Connection, User-Agent, Cookie, OCB.SYNCER.JSESSIONID
         allowed-headers: '*'
-        allowed-methods: POST,GET,DELETE,PUT
+        allowed-methods: POST,GET,DELETE,PUT,OPTIONS
         max-age: 1800
 
 security:
