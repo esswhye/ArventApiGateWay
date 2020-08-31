@@ -92,6 +92,7 @@ public class JwtTokenAuthenticationFilter extends OncePerRequestFilter {
             }
         } catch (ExpiredJwtException e) {
             log.info("EXPIRED");
+
             httpServletResponse.setStatus(HttpStatus.SC_EXPECTATION_FAILED);
             httpServletResponse.sendError(httpServletResponse.getStatus(), "Expired JWT");
             filterChain.doFilter(httpServletRequest, httpServletResponse);
