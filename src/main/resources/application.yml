@@ -52,7 +52,7 @@ ribbon:
   eager-load:
     enabled: true
   maxAutoRetries: 0
-  MaxAutoRetriesNextServer: 2
+  MaxAutoRetriesNextServer: 1
   OkToRetryOnAllOperations: true
   retryableStatusCodes: 500,404,502,-408
 

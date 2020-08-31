@@ -1,6 +1,7 @@
 package com.arvent.zuul.filter;
 
 import com.arvent.zuul.JwtConfig.JwtConfig;
+import com.netflix.zuul.context.RequestContext;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -8,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -74,9 +74,21 @@ public class JwtTokenAuthenticationFilter extends OncePerRequestFilter {
                                 .collect(Collectors.toList()));
 
                 // 6. Authenticate the user
-                // Now, user is authenticated
+
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+                // Now, user is authenticated
+
+
+                //MutableHttpServletRequest mutableRequest = new MutableHttpServletRequest((HttpServletRequest) httpServletRequest);
+                //mutableRequest.putHeader("userID", claims.get("id").toString());
+
+                //Add header(userID) into request
+                //https://stackoverflow.com/questions/50927662/how-to-add-a-custom-header-in-spring-webfilter
+                RequestContext.getCurrentContext().addZuulRequestHeader("userID", claims.get("id").toString());
+
+
                 filterChain.doFilter(httpServletRequest, httpServletResponse);
+
             }
         } catch (ExpiredJwtException e) {
             log.info("EXPIRED");
