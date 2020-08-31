@@ -3,6 +3,7 @@ zuul:
   #stripPrefix: true
   #ignored-patterns: /actuator/**
   #ignoredServices: "*"
+  ignored-headers: Access-Control-Allow-Credentials, Access-Control-Allow-Origin
   ribbon-isolation-strategy: thread
   thread-pool:
     use-separate-thread-pools: true
@@ -107,13 +108,13 @@ management:
     web:
       exposure:
         include: health , prometheus
-      cors:
-        allow-credentials: true
-        allowed-origins: '*'
+        #      cors:
+        #        allow-credentials: true
+        #        allowed-origins: '*'
         #allowed-headers: Origin, X-Requested-With, Content-Type, Accept, Connection, User-Agent, Cookie, OCB.SYNCER.JSESSIONID
-        allowed-headers: '*'
-        allowed-methods: POST,GET,DELETE,PUT
-        max-age: 1800
+        #        allowed-headers: '*'
+        #        allowed-methods: '*'
+        #        max-age: 1800
         #exposed-headers: Access-Control-Allow-Origin, Access-Control-Allow-Credentials
 
 security:

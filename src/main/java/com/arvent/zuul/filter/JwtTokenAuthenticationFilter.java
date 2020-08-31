@@ -93,9 +93,13 @@ public class JwtTokenAuthenticationFilter extends OncePerRequestFilter {
         } catch (ExpiredJwtException e) {
             log.info("EXPIRED");
             httpServletResponse.setStatus(HttpStatus.SC_EXPECTATION_FAILED);
-            SecurityContextHolder.clearContext();
+            httpServletResponse.sendError(httpServletResponse.getStatus(), "Expired JWT");
+            filterChain.doFilter(httpServletRequest, httpServletResponse);
+            //SecurityContextHolder.clearContext();
         } catch (Exception e) {
-            SecurityContextHolder.clearContext();
+            httpServletResponse.sendError(HttpServletResponse.SC_NOT_ACCEPTABLE, "Unable to verify token");
+            filterChain.doFilter(httpServletRequest, httpServletResponse);
+            //SecurityContextHolder.clearContext();
         }
         //go to the next filter in the filter chain
 //        filterChain.doFilter(httpServletRequest,httpServletResponse);
