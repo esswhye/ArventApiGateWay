@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * It is recommended to add an AdminController that is not visible for the user
+ *
  */
 //https://medium.com/omarelgabrys-blog/microservices-with-spring-boot-authentication-with-jwt-part-3-fafc9d7187e8
 
